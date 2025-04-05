@@ -1,0 +1,26 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Runs daily at 9:00 UTC
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Make a change
+      run: |
+        echo "Last update: $(date)" > last_update.txt
+
+    - name: Commit and push
+      run: |
+        git config --global user.name 'Sheikh Suhail Khursheed'
+        git config --global user.email 'sheikhsuhail2026@gmail.com'
+        git add last_update.txt
+        git commit -m "Daily update: $(date)" || echo "Nothing to commit"
+        git push
