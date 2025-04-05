@@ -5,6 +5,9 @@ on:
     - cron: '52 9 * * *'  # Runs daily at 9:00 UTC
   workflow_dispatch:      # Allows manual trigger
 
+permissions:
+  contents: write         # Grants write permission to GITHUB_TOKEN
+
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
